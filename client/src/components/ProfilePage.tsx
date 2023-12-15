@@ -11,13 +11,13 @@ const ProfilePage: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
             window.location.href = '/';
         } else {
             fetch('http://localhost:3000/profile', {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${accessToken}`
                 }
             })
                 .then(response => response.json())
@@ -33,7 +33,8 @@ const ProfilePage: React.FC = () => {
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
         navigate('/');
     };
 

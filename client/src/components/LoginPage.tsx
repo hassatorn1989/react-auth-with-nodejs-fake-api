@@ -17,8 +17,9 @@ const LoginPage: React.FC = () => {
             });
 
             const data = await response.json();
-            if (data.token) {
-                localStorage.setItem('token', data.token);
+            if (data.accessToken) {
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);
                 window.location.href = '/profile';
             } else {
                 alert('Invalid credentials');
